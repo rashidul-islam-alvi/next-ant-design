@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Button, Checkbox, Form } from "antd";
+import { Button, Checkbox, Form, Input } from "antd";
 import { SmileOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import CardWrapper from "./ui/card-wrapper";
 import FormField from "./ui/form-field";
@@ -21,7 +21,7 @@ type FieldType = {
   agree?: string;
 };
 
-const SignUpForm = () => {
+const NewSignUpForm = () => {
   return (
     <CardWrapper
       headerLabel="Getting Started"
@@ -96,4 +96,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default NewSignUpForm;
