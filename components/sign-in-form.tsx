@@ -16,6 +16,7 @@ interface FieldType {
 
 const SignInForm = () => {
   const router = useRouter();
+
   const [signinUser, { data, isLoading, error, isError, isSuccess }] =
     useSigninUserMutation();
 
@@ -66,7 +67,7 @@ const SignInForm = () => {
 
           {isError && (
             <div className="flex items-center p-3 text-lg rounded-md bg-red-200 my-5 uppercase gap-x-2 text-destructive">
-              <p className="text-red-500"> {error?.data.error}</p>
+              <p className="text-red-500"> {(error as any).data.error}</p>
             </div>
           )}
 
