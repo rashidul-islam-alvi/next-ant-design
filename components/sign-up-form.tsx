@@ -5,23 +5,29 @@ import { Button, Checkbox, Form } from "antd";
 import { SmileOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import CardWrapper from "./ui/card-wrapper";
 import FormField from "./ui/form-field";
-
-const onFinish = (values: any) => {
-  console.log("Success:", values);
-};
-
-const onFinishFailed = (errorInfo: any) => {
-  console.log("Failed:", errorInfo);
-};
-
-type FieldType = {
-  email?: string;
-  username?: string;
-  password?: string;
-  agree?: string;
-};
+import { useSignupUserMutation } from "@/redux/features/auth/api/authApi";
 
 const SignUpForm = () => {
+  const [signupUser, { data, isLoading }] = useSignupUserMutation();
+
+  const onFinish = (values: any) => {
+    const signUpCredential = { email: values.email, password: values.password };
+    signupUser(signUpCredential);
+  };
+
+  const onFinishFailed = (errorInfo: any) => {
+    console.log("Failed:", errorInfo);
+  };
+
+  console.log(data);
+
+  type FieldType = {
+    email?: string;
+    username?: string;
+    password?: string;
+    agree?: string;
+  };
+
   return (
     <CardWrapper
       headerLabel="Getting Started"
@@ -35,7 +41,6 @@ const SignUpForm = () => {
         initialValues={{ remember: true }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
-        autoComplete="off"
       >
         <FormField
           icon={
@@ -66,7 +71,7 @@ const SignUpForm = () => {
           rulesMessage="Password can't be empty"
         />
 
-        <Form.Item<FieldType> name="agree">
+        <Form.Item<FieldType> name="agree" valuePropName="checked">
           <Checkbox
             style={{
               fontSize: "15px",

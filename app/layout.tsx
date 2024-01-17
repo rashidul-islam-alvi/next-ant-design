@@ -3,6 +3,7 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/nav-bar";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
+import ReduxProvider from "@/redux/provider";
 
 const roboto = Roboto({ subsets: ["latin"], weight: ["500"] });
 
@@ -19,14 +20,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.className}>
-        <AntdRegistry>
-          <div className="h-[9vh]">
-            <Navbar />
-          </div>
-          <div className="flex justify-center items-center h-[91vh]">
-            {children}
-          </div>
-        </AntdRegistry>
+        <ReduxProvider>
+          <AntdRegistry>
+            <div className="h-[9vh]">
+              <Navbar />
+            </div>
+            <div className="flex justify-center items-center h-[91vh]">
+              {children}
+            </div>
+          </AntdRegistry>
+        </ReduxProvider>
       </body>
     </html>
   );
