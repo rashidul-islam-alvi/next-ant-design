@@ -39,7 +39,7 @@ const UsersList = () => {
     if (isError) {
       toast.error("Something went wrong");
     }
-  }, [isSuccess, isError]);
+  }, [isSuccess, isError, id]);
 
   const items: MenuProps["items"] = [
     {

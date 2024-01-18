@@ -1,8 +1,8 @@
 import React from "react";
-import { LoadingOutlined, SyncOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 
 const Loading = () => {
-  return <SyncOutlined spin className="text-5xl" />;
+  return <Spin size="large" />;
 };
 
 export default Loading;
