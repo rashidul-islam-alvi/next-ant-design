@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Button, Dropdown, Space, Table, Tag } from "antd";
 import type { MenuProps, TableProps } from "antd";
 import { MoreOutlined } from "@ant-design/icons";
+import { useDeleteUserMutation } from "@/redux/features/users/api/usersApi";
+import toast from "react-hot-toast";
 
 interface DataType {
   key: string;
@@ -9,16 +11,26 @@ interface DataType {
   email: string;
   options: string[];
 }
+
 // todo: make interface of users
 const UsersList = ({ users }: any) => {
   const [id, setId] = useState("");
+  const [deleteUser, { isError, isSuccess }] = useDeleteUserMutation();
 
   const handleEditClick = () => {
     console.log("edit", id);
   };
   const handleDeleteClick = () => {
-    console.log("delete", id);
+    deleteUser(id);
   };
+
+  if (isSuccess) {
+    toast.success("Deleted Succesfully");
+  }
+
+  if (isError) {
+    toast.error("Something went wrong");
+  }
 
   const items: MenuProps["items"] = [
     {
@@ -65,7 +77,12 @@ const UsersList = ({ users }: any) => {
             setId(record.key);
           }}
         >
-          <Dropdown menu={{ items }} placement="bottomRight" arrow>
+          <Dropdown
+            menu={{ items }}
+            placement="bottomRight"
+            trigger={["click"]}
+            arrow
+          >
             <Button type="text">
               <MoreOutlined rotate={90} className="text-2xl" />
             </Button>
@@ -74,12 +91,13 @@ const UsersList = ({ users }: any) => {
       ),
     },
   ];
+
   // todo: make interface of user
   const data = users.map((user: any) => ({
     key: user.id,
     username: user.username,
     email: user.email,
-    option: ["edit"],
+    option: ["edit", "delete"],
   }));
 
   return (

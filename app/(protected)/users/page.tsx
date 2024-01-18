@@ -3,11 +3,10 @@
 import Header from "@/components/ui/header";
 import UsersList from "@/components/users-list";
 import { useGetAllUsersQuery } from "@/redux/features/users/api/usersApi";
-import React, { useState } from "react";
+import React from "react";
 
 const page = () => {
-  const [page, setPage] = useState(1);
-  const getAllUsers = useGetAllUsersQuery(page);
+  const getAllUsers = useGetAllUsersQuery(1);
 
   return (
     <div className="flex flex-col gap-10">
@@ -16,11 +15,7 @@ const page = () => {
       </div>
 
       <div>
-        {getAllUsers.isLoading ? (
-          <h2>Loading</h2>
-        ) : (
-          <UsersList users={getAllUsers.data} />
-        )}
+        {getAllUsers.isSuccess && <UsersList users={getAllUsers.data} />}
       </div>
     </div>
   );

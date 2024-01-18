@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/nav-bar";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import ReduxProvider from "@/redux/provider";
+import { Toaster } from "react-hot-toast";
 
 const roboto = Roboto({ subsets: ["latin"], weight: ["500"] });
 
@@ -21,7 +22,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={roboto.className}>
         <ReduxProvider>
-          <AntdRegistry>{children}</AntdRegistry>
+          <AntdRegistry>
+            {children}
+            <Toaster position="top-right" />
+          </AntdRegistry>
         </ReduxProvider>
       </body>
     </html>
