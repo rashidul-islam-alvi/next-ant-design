@@ -1,11 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Dropdown, Space, Table, Tag } from "antd";
 import type { MenuProps, TableProps } from "antd";
 import { MoreOutlined } from "@ant-design/icons";
-import { useDeleteUserMutation } from "@/redux/features/users/api/usersApi";
+import {
+  useDeleteUserMutation,
+  useGetAllUsersQuery,
+} from "@/redux/features/users/api/usersApi";
 import toast from "react-hot-toast";
+import Loading from "./loading";
 
 interface DataType {
   key: string;
@@ -15,8 +19,9 @@ interface DataType {
 }
 
 // todo: make interface of users
-const UsersList = ({ users }: any) => {
+const UsersList = () => {
   const [id, setId] = useState("");
+  const getAllUsers = useGetAllUsersQuery(1);
   const [deleteUser, { isError, isSuccess }] = useDeleteUserMutation();
 
   const handleEditClick = () => {
@@ -26,13 +31,15 @@ const UsersList = ({ users }: any) => {
     deleteUser(id);
   };
 
-  if (isSuccess) {
-    toast.success("Deleted Succesfully");
-  }
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Deleted Successfully " + id);
+    }
 
-  if (isError) {
-    toast.error("Something went wrong");
-  }
+    if (isError) {
+      toast.error("Something went wrong");
+    }
+  }, [isSuccess, isError]);
 
   const items: MenuProps["items"] = [
     {
@@ -94,8 +101,7 @@ const UsersList = ({ users }: any) => {
     },
   ];
 
-  // todo: make interface of user
-  const data = users.map((user: any) => ({
+  const data = getAllUsers.data?.map((user: any) => ({
     key: user.id,
     username: user.username,
     email: user.email,
@@ -104,7 +110,11 @@ const UsersList = ({ users }: any) => {
 
   return (
     <div>
-      <Table columns={columns} dataSource={data} />
+      {getAllUsers.isLoading ? (
+        <Loading />
+      ) : (
+        <Table columns={columns} dataSource={data} />
+      )}
     </div>
   );
 };
