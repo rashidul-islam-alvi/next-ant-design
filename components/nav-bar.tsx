@@ -37,17 +37,18 @@ const Navbar = ({ loggedIn }: NavbarProps) => {
       {!loggedIn && <Logo />}
 
       {loggedIn && (
-        <Input
-          suffix={<SearchOutlined style={{ color: "GrayText" }} />}
-          style={{
-            width: "550px",
-            height: "50px",
-            backgroundColor: "#F0F5FA",
-            borderRadius: "15px",
-            fontSize: "16px",
-          }}
-          placeholder="Search"
-        />
+        <div className="lg:w-[550px] md:w-[350px] w-[250px]">
+          <Input
+            suffix={<SearchOutlined style={{ color: "GrayText" }} />}
+            style={{
+              height: "50px",
+              backgroundColor: "#F0F5FA",
+              borderRadius: "15px",
+              fontSize: "16px",
+            }}
+            placeholder="Search"
+          />
+        </div>
       )}
       <div>
         {loggedIn ? (

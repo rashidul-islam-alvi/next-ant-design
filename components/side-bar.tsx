@@ -36,7 +36,7 @@ const SideBar = () => {
   const pathName = usePathname();
 
   return (
-    <div className="w-[250px] border-r-2 h-full px-8 py-5 flex flex-col gap-5 ">
+    <div className="w-[150px] md:w-[250px] border-r-2 h-full px-5 md:px-8 py-5 flex flex-col gap-5 ">
       <div className="mb-10">
         <Logo />
       </div>
@@ -49,7 +49,7 @@ const SideBar = () => {
           {menuItems.map((item) => (
             <div
               key={item.id}
-              className={`px-5 py-4 text-[16px] text-[#A7AFBC] rounded-md ${
+              className={`px-5 py-4 text-[16px] text-[#A7AFBC] hover:bg-[#F0F5FA] rounded-md ${
                 pathName === item.href ? "bg-[#F0F5FA]" : ""
               } duration-500 ease-in-out transition-all `}
             >
