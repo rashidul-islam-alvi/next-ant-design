@@ -9,8 +9,8 @@ interface DataType {
   email: string;
   options: string[];
 }
-
-const UsersList = ({ users }) => {
+// todo: make interface of users
+const UsersList = ({ users }: any) => {
   const [id, setId] = useState("");
 
   const handleEditClick = () => {
@@ -74,8 +74,8 @@ const UsersList = ({ users }) => {
       ),
     },
   ];
-
-  const data = users.map((user) => ({
+  // todo: make interface of user
+  const data = users.map((user: any) => ({
     key: user.id,
     username: user.username,
     email: user.email,
