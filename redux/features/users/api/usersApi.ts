@@ -23,7 +23,21 @@ export const usersApi = createApi({
         };
       },
     }),
+
+    createUser: builder.mutation({
+      query: (newUser) => {
+        return {
+          url: `users`,
+          method: "POST",
+          body: { ...newUser, userId: 1 },
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetAllUsersQuery, useDeleteUserMutation } = usersApi;
+export const {
+  useGetAllUsersQuery,
+  useDeleteUserMutation,
+  useCreateUserMutation,
+} = usersApi;
