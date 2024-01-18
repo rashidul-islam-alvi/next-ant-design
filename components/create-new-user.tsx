@@ -1,19 +1,22 @@
 "use client";
 
-import { Button, Form, Input, Modal } from "antd";
-import React, { useState } from "react";
+import { Button, Form, Modal } from "antd";
+import React, { useEffect, useState } from "react";
 import CreateNewUserForm from "./create-new-user-form";
+import { useCreateUserMutation } from "@/redux/features/users/api/usersApi";
+import toast from "react-hot-toast";
 
 const CreateNewUser = () => {
-  const [newUser, setNewUser] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
+  const [createNewUser, { isLoading, isError, isSuccess }] =
+    useCreateUserMutation();
   const [form] = Form.useForm();
 
   const handleOkClick = () => {
     form
       .validateFields()
       .then((values) => {
-        setNewUser(values);
+        createNewUser(values);
         form.resetFields();
         setModalOpen(false);
       })
@@ -27,7 +30,16 @@ const CreateNewUser = () => {
     setModalOpen(false);
   };
 
-  console.log(newUser);
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("User Created Succesfully.");
+    }
+
+    if (isError) {
+      toast.error("Something Went Wrong");
+    }
+  }, [isError, isSuccess]);
+
   return (
     <div>
       <Button type="dashed" size="large" onClick={() => setModalOpen(true)}>
