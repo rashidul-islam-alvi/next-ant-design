@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 export default function Home() {
   const router = useRouter();
   return (
-    <main className="p-3">
+    <main className="p-3 h-screen justify-center items-center flex">
       <Button
         type="default"
         onClick={() => {

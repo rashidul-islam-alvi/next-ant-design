@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
-import ImageComponent from "./ui/custom-image-component";
-import { DownOutlined } from "@ant-design/icons";
-import { Button, Dropdown, MenuProps, Space } from "antd";
+import React from "react";
+import { DownOutlined, SearchOutlined, BellOutlined } from "@ant-design/icons";
+import { Button, Dropdown, MenuProps, Space, Input, Avatar } from "antd";
+import Logo from "./logo";
 
 const items: MenuProps["items"] = [
   {
@@ -27,26 +27,50 @@ const menuProps = {
   onClick: handleMenuClick,
 };
 
-const Navbar = () => {
+interface NavbarProps {
+  loggedIn?: boolean;
+}
+
+const Navbar = ({ loggedIn }: NavbarProps) => {
   return (
-    <div className="flex justify-between px-10 py-5">
-      <div className="flex gap-5 items-center">
-        <ImageComponent
-          path="/paper.png"
-          alt="nav_logo_paper"
-          className="w-14"
+    <div className="flex justify-between items-center px-10 py-5">
+      {!loggedIn && <Logo />}
+
+      {loggedIn && (
+        <Input
+          suffix={<SearchOutlined style={{ color: "GrayText" }} />}
+          style={{
+            width: "550px",
+            height: "50px",
+            backgroundColor: "#F0F5FA",
+            borderRadius: "15px",
+            fontSize: "16px",
+          }}
+          placeholder="Search"
         />
-        <h2 className="text-2xl">Stack</h2>
-      </div>
+      )}
       <div>
-        <Dropdown className="bg-[#F0F5FA]" menu={menuProps}>
-          <Button className="text-xs" size="middle">
-            <Space>
-              English (UK)
-              <DownOutlined />
-            </Space>
-          </Button>
-        </Dropdown>
+        {loggedIn ? (
+          <div className="flex gap-5">
+            <BellOutlined className="text-2xl " style={{ color: "GrayText" }} />
+            <Avatar
+              size={"large"}
+              style={{
+                backgroundColor: "ButtonHighlight",
+                border: "1px solid gray",
+              }}
+            />
+          </div>
+        ) : (
+          <Dropdown className="bg-[#F0F5FA]" menu={menuProps}>
+            <Button className="text-xs" size="middle">
+              <Space>
+                English (UK)
+                <DownOutlined />
+              </Space>
+            </Button>
+          </Dropdown>
+        )}
       </div>
     </div>
   );

@@ -85,13 +85,13 @@ const SignUpForm = () => {
         <Form.Item>
           <Button
             style={{
-              width: "100%",
               height: "50px",
               borderRadius: "15px",
               backgroundColor: "#377DFF",
             }}
             type="primary"
             htmlType="submit"
+            block
           >
             Submit
           </Button>

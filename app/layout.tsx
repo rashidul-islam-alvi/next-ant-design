@@ -21,14 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={roboto.className}>
         <ReduxProvider>
-          <AntdRegistry>
-            <div className="h-[9vh]">
-              <Navbar />
-            </div>
-            <div className="flex justify-center items-center h-[91vh]">
-              {children}
-            </div>
-          </AntdRegistry>
+          <AntdRegistry>{children}</AntdRegistry>
         </ReduxProvider>
       </body>
     </html>
