@@ -7,6 +7,7 @@ import CardWrapper from "./ui/card-wrapper";
 import FormField from "./ui/form-field";
 import { useRouter } from "next/navigation";
 import { useSigninUserMutation } from "@/redux/features/auth/api/authApi";
+import { storeToken } from "@/lib/cookies";
 
 interface FieldType {
   username?: string;
@@ -24,6 +25,11 @@ const SignInForm = () => {
     const loginCredentials = { email: values.email, password: values.password };
     signinUser(loginCredentials);
   };
+
+  if (isSuccess) {
+    storeToken(data.token);
+    router.push("/users");
+  }
 
   return (
     <CardWrapper
