@@ -10,12 +10,12 @@ export default function Home() {
       <Button
         type="default"
         onClick={() => {
-          router.push("/sign-up");
+          router.push("/sign-in");
         }}
         className="uppercase"
         size="large"
       >
-        Click here to sign up
+        Click here to sign in
       </Button>
     </main>
   );
