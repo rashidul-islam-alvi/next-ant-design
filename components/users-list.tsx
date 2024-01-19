@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Button, Dropdown, Space, Table, Tag } from "antd";
+import { Button, Dropdown, Table } from "antd";
 import type { MenuProps, TableProps } from "antd";
 import { MoreOutlined } from "@ant-design/icons";
 import {
@@ -18,7 +18,6 @@ interface DataType {
   options: string[];
 }
 
-// todo: make interface of users
 const UsersList = () => {
   const [id, setId] = useState("");
   const getAllUsers = useGetAllUsersQuery(1);
